@@ -23,14 +23,7 @@ print(sum)
 ```
 
 ## Introduction 
-There is a serious problem with the incarceration system within the United 
-States. Most importantly there are issues and inequalities in this system 
-regarding issues of race, gender, color, and more. When we incarcerate people at uneven rates there is a clear violation of human rights, freedoms, and a 
-mishandling and faulty division of power. The Vera website has determined that 
-people of color, more specifically black people, are two times more likely to be incarcerated than white people. This statistic alongside other very serious ones listed on the Vera website show that the direct stakeholders of this social issue are US Citizens and Immigrants, people of color, and government figures such as police. The indirect stakeholders are people working in the prison system, families of those incarcerated, and the communities they are tied to. 
-This report will encapsulate important information and offer insight on the 
-growth of the prison population by nation and state, reveal patterns of 
-inequality, and lastly a visualization showing how the inequalities vary geographically. 
+There is a serious problem with the incarceration system within the United States. Most importantly there are issues and inequalities in this system regarding issues of race, gender, color, and more. When we incarcerate people at uneven rates there is a clear violation of human rights, freedoms, and a mishandling and faulty division of power. The Vera website has determined that people of color, more specifically black people, are two times more likely to be incarcerated than white people. This statistic alongside other very serious ones listed on the Vera website show that the direct stakeholders of this social issue are US Citizens and Immigrants, people of color, and government figures such as police. The indirect stakeholders are people working in the prison system, families of those incarcerated, and the communities they are tied to. This report will encapsulate important information and offer insight on the growth of the prison population by nation and state, reveal patterns of inequality, and lastly a visualization showing how the inequalities vary geographically. 
 
 ## Data Summary 
 [TODO]
