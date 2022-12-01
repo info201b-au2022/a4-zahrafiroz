@@ -5,7 +5,8 @@ library(tidyverse)
 # This function returns the incarceration data as a dataframe
 # Note: The CSV file is stored on my local machine to speed load times
 #---------------------------------------------------------------------------#
-incarceration_df <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv")
+incarceration <- read.csv("https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv")
+incarceration_df <- data.frame(incarceration)
 # Processing places ----
 # NOTE: For these functions to work, the dataframe `incarceration_df` must 
 #       be initialized
