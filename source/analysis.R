@@ -21,7 +21,34 @@ test_query2 <- function(num=6) {
 
 ## Section 2  ---- 
 #----------------------------------------------------------------------------#
+#values;
+female_jail_pop <- 
+  incarceration_df  %>%
+  summarise(x = sum(female_jail_pop, na.rm = TRUE))
 
+male_jail_pop <-
+  incarceration_df  %>%
+  summarise(x = sum(male_jail_pop, na.rm = TRUE))
+
+black_jail_pop <- incarceration_df$black_prison_pop
+white_jail_pop <- incarceration_df$white_jail_pop
+native_jail_pop <- incarceration_df$native_jail_pop
+latinx_jail_pop <- incarceration_df$latinx_jail_pop
+
+
+get_jail_pop_by_states <- function() {
+  p <- incarceration_df %>%
+    group_by(state) %>%
+    summarise(x = sum(total_jail_pop, na.rm = TRUE)) %>%
+    select(total_pop) %>%
+    pull(total_pop)
+  return(p)
+}
+states <- (incarceration_df$state)
+%>% group_by(state)
+
+get_jail_pop_by_states(states)
+}
 #----------------------------------------------------------------------------#
 
 ## Section 3  ---- 
@@ -37,12 +64,18 @@ get_year_jail_pop <- function() {
 return()   
 }
 
-# This function ... <todo:  update comment>
-plot_jail_pop_for_us <- function()  {
-  # TODO: Implement this function 
-  return()   
+# Function to make chart to by state showing region and population
 } 
+plot_jail_pop_for_us <-
+  incarceration_df %>%
+  group_by(state) %>%
+  select(state, total_pop, region)
 
+  ggplot(plot_jail_pop)+
+  geom_col(
+    mapping = aes(x = total_pop, y = state, fill = region),
+    position = "dodge"
+  )
 ## Section 4  ---- 
 #----------------------------------------------------------------------------#
 # Growth of Prison Population by State 
@@ -77,6 +110,7 @@ states_with_no_jail_pop <- function() {
 # <a map shows potential patterns of inequality that vary geographically>
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
+ggplot(data = incarceration_df)
 #----------------------------------------------------------------------------#
 
 ## Load data frame ---- 
