@@ -1,41 +1,36 @@
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
+library(leaflet)
 # The functions might be useful for A4
 source("../source/a4-helpers.R")
-
-## Test queries ----
-#----------------------------------------------------------------------------#
-# Simple queries for basic testing
-#----------------------------------------------------------------------------#
-# Return a simple string
-test_query1 <- function() {
-  return ("Hello world")
-}
-
-# Return a vector of numbers
-test_query2 <- function(num=6) {
-  v <- seq(1:num)
-  return(v)
-}
 
 ## Section 2  ---- 
 #----------------------------------------------------------------------------#
 #values;
+#female jail pop
 female_jail_pop <- 
   incarceration_df  %>%
   summarise(x = sum(female_jail_pop, na.rm = TRUE))
 
+#male jail pop
 male_jail_pop <-
   incarceration_df  %>%
   summarise(x = sum(male_jail_pop, na.rm = TRUE))
 
+#black jail pop
 black_jail_pop <- incarceration_df$black_prison_pop
+
+#white jail pop
 white_jail_pop <- incarceration_df$white_jail_pop
+
+#native jail pop
 native_jail_pop <- incarceration_df$native_jail_pop
+
+#latinx jail pop
 latinx_jail_pop <- incarceration_df$latinx_jail_pop
 
-
+#getting jail pop by state
 get_jail_pop_by_states <- function() {
   p <- incarceration_df %>%
     group_by(state) %>%
@@ -44,28 +39,31 @@ get_jail_pop_by_states <- function() {
     pull(total_pop)
   return(p)
 }
+#check function
+AL_jail_pop <- get_jail_pop_by_states(AL)
+WY_jail_pop <- get_jail_pop_by_states(WY)
+
+
+#value states 
 states <- (incarceration_df$state)
 %>% group_by(state)
-
-get_jail_pop_by_states(states)
-}
 #----------------------------------------------------------------------------#
 
 ## Section 3  ---- 
 #----------------------------------------------------------------------------#
 # Growth of the U.S. Prison Population
 total_pri_pop <- sum(incarceration_df$total_jail_pop, na.rm = TRUE)
-1970_pop <- incarceration_df
 #----------------------------------------------------------------------------#
 
 # This function ... <todo:  update comment>
-get_year_jail_pop <- function() {
-  # TODO: Implement this function 
-return()   
-}
+  get_year_jail_pop <- function(year) {
+    year_jail_pop <- filter(incarceration_df,c(year)) %>%
+      select(total_pop)
+    
+   return(year_jail_pop)
+  }
 
 # Function to make chart to by state showing region and population
-} 
 plot_jail_pop_for_us <-
   incarceration_df %>%
   group_by(state) %>%
@@ -82,9 +80,16 @@ plot_jail_pop_for_us <-
 states <- incarceration_df$state %>%  
 group_by(incarceration_df, state)
 
-growth_state_pop <- function() {
-  
-}
+  most_pri_in_state <- function(state, total_pop) {
+    better_team <- filter(incarceration_df, c(state, total_pop)) %>%
+      filter(total_pop == max(total_pop)) %>%
+      select(state, total_pop)
+    
+    most_pri_in_state
+  }
+
+  growth_state_pop <- function() {
+  }
 # See Canvas
 #----------------------------------------------------------------------------#
 
@@ -92,7 +97,7 @@ growth_state_pop <- function() {
 #----------------------------------------------------------------------------#
 # <variable comparison that reveals potential patterns of inequality>
 # Your functions might go here ... <todo:  update comment>
-
+#find most frequent
 states_with_no_jail_pop <- function() {
   t <- incarceration_df %>%
     group_by(state) %>%
@@ -104,13 +109,24 @@ states_with_no_jail_pop <- function() {
 }
 
 #----------------------------------------------------------------------------#
-
 ## Section 6  ---- 
+
 #----------------------------------------------------------------------------#
 # <a map shows potential patterns of inequality that vary geographically>
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
-ggplot(data = incarceration_df)
+map <- leaflet(incarceration_df)  %>% 
+  addTiles() 
+
+map %>% addCircleMarkers(
+  lat = ~total_pri_pop,
+  lng = ~total_pri_pop,
+  popup = ~state,
+  stroke = FALSE,
+  radius = 1,
+  fillOpacity = 0.5
+)
+
 #----------------------------------------------------------------------------#
 
 ## Load data frame ---- 
